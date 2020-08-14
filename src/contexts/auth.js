@@ -44,7 +44,7 @@ export const AuthProvider = (props) => {
     setUser(user);
 
     //seta no axios o token que veio de resposta apos autenticacao
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     //seta no async storage as informacoes do user e token para quando fechar
     //aplicao saber que ja logou e nao precisar relogar toda a vez
@@ -52,7 +52,7 @@ export const AuthProvider = (props) => {
       `@${AppName}:user`,
       JSON.stringify(user),
     );
-    await AsyncStorage.setItem(`@${AppName}:token`, token);
+    //await AsyncStorage.setItem(`@${AppName}:token`, token);
 
   }
 

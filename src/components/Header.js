@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet, Dimensions, PixelRatio } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet, Dimensions, PixelRatio, Keyboard, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { colorTheme, pSBC } from '../constants';
 
@@ -14,10 +14,28 @@ export default function Header(props) {
   let color1 = pSBC(0.20, colorTheme, 'rgba(00, 00, 00,0.7)');
   color1 = pSBC(-0.05, color1);
 
+  const [keyboardOpened, setKeyboardOpened] = useState(false);
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
+    Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
+  }, []);
+
+  const _keyboardDidShow = () => {
+    setKeyboardOpened(true);
+  };
+
+  const _keyboardDidHide = () => {
+    setKeyboardOpened(false);
+  };
+
+  let keyboardMargin = 0;
+  if (Platform.OS === 'android') {
+    keyboardOpened ? keyboardMargin = -100 : keyboardMargin = 0;
+  }
   return (
     <View style={styles.container}>
-
-      <View style={styles.circles}>
+      <View style={[styles.circles, { marginTop: keyboardMargin }]}>
         <View style={styles.circleShadow}>
           <View
             style={[styles.circle, styles.fourthCircle, { backgroundColor: color4 }]} />
@@ -37,18 +55,28 @@ export default function Header(props) {
 
       <View style={styles.titlesContainer}>
         <Text style={styles.title}>{props.title ? props.title : 'Título'}</Text>
-        <Text style={styles.subtitle}>{props.subtitle ? props.sutitle : null}</Text>
       </View>
 
-    </View>
+    </View >
   )
 }
 
 let marginDevice = 0;
+let marginLeftDevice = 0;
 
-if (Dimensions.get('window').height <= 760) {
+if (Dimensions.get('window').height <= 760 && Dimensions.get('window').height > 570) {
   marginDevice = -50;
+} else if (Dimensions.get('window').height <= 570) {
+  marginDevice = -110;
+  marginLeftDevice = -40;
 }
+
+let titleFontSize = 55;
+
+if (Dimensions.get('window').width * PixelRatio.get() <= 640) {
+  titleFontSize = 45;
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -59,7 +87,6 @@ const styles = StyleSheet.create({
   circles: {
     zIndex: 2,
     marginTop: -20,
-    position: 'absolute',
   },
 
   titlesContainer: {
@@ -71,17 +98,12 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    flexWrap: 'wrap',
     color: "#FFF",
-    fontSize: 55,
+    fontSize: titleFontSize,
     fontFamily: 'Nunito-Bold',
-    width: 200,
+    width: '80%',
     textAlign: 'center',
-  },
-
-  subtitle: {
-    color: "#EEE",
-    fontSize: 45,
-    fontFamily: 'Nunito',
   },
 
   circleShadow: {
@@ -95,10 +117,12 @@ const styles = StyleSheet.create({
     elevation: 15,
   },
   circle: {
+    zIndex: 2,
     width: 500,
     height: 500,
     borderRadius: 250,
     position: 'absolute',
+    marginLeft: marginLeftDevice,
     marginTop: -220 + marginDevice,
   },
 
@@ -106,17 +130,17 @@ const styles = StyleSheet.create({
   },
   secondCircle: {
     marginTop: -230 + marginDevice,
-    marginLeft: 0,
+    marginLeft: marginLeftDevice,
     width: 540,
     height: 540,
     borderRadius: 270,
   },
   thirdCircle: {
     marginTop: -210 + marginDevice,
-    marginLeft: -40,
+    marginLeft: -40 + marginLeftDevice,
   },
   fourthCircle: {
     marginTop: -205 + marginDevice,
-    marginLeft: -100,
+    marginLeft: -100 + marginLeftDevice,
   }
 })

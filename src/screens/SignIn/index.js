@@ -22,11 +22,9 @@ import Button from '../../components/Button';
 
 const initialUserData = {
   name: '',
-  email: 'guisilva.dev@gmail.com',
-  password: '827554',
+  email: '',
+  password: '',
   confirmPassword: '',
-  firstName: '1',
-  lastName: '2',
 }
 
 const SignIn = (props) => {
@@ -80,8 +78,8 @@ const SignIn = (props) => {
 
   //listener que verifica se os forms atendem as validacoes
   useEffect(() => {
-    setValidForm(validations(userData));
-  }, [userData]);
+    setValidForm(validations(userData, stageNew));
+  }, [userData, stageNew]);
 
   return (
     <Container>
@@ -93,7 +91,7 @@ const SignIn = (props) => {
 
         {stageNew &&
           <Input placeholder="Name" iconName="user" onChangeText={
-            (text) => setUserData({ ...userData, name: text, firstName: text, lastName: text })}
+            (text) => setUserData({ ...userData, name: text, })}
             value={userData.name}
           />}
 

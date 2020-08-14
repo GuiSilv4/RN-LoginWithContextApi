@@ -80,13 +80,14 @@ export default function Input(props) {
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: 3,
     marginTop: Platform.OS === 'ios' ? 35 : 15,
     flexDirection: "row",
     borderBottomWidth: 1,
     borderBottomColor: "#444",
     width: "80%",
     alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   icon: {
     marginBottom: Platform.OS === 'ios' ? 5 : 0,

@@ -1,6 +1,6 @@
 //CONSTANTS FOR APP CUSTOMIZATION
 
-export const AppName = 'Car Wash';
+export const AppName = 'Free Park';
 
 export const font = 'Nunito';
 

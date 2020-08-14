@@ -14,9 +14,11 @@ export const HeaderContainer = styled.View`
 `;
 
 export const InputsContainer = styled.View`
+  z-index: 3;
   flex: 2;
   width: 100%;
   justify-content: center;
+  margin-top: 40px;
 `;
 
 export const BottomContainer = styled.View`

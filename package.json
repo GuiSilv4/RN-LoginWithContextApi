@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "npx react-native run-ios",
     "ios8": "npx react-native run-ios --simulator='iPhone 8'",
+    "ios5": "npx react-native run-ios --simulator='iPhone 5s'",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."

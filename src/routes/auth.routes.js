@@ -7,7 +7,7 @@ const AuthStack = createStackNavigator();
 
 const AuthRoutes = () => (
   <>
-    <StatusBar barStyle="light-content" backgroundColor="#716ef5" />
+    <StatusBar barStyle="light-content" backgroundColor="#4862c6" />
     <AuthStack.Navigator screenOptions={{
       headerShown: false
     }}>

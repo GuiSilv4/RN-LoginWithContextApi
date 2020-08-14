@@ -1,7 +1,7 @@
 import React from 'react';
 
 //API URL
-export const API_URL = 'https://mesannodejsapiwithverification.herokuapp.com/api';
+export const API_URL = 'https://thingsbeforeyoudie.herokuapp.com/api';
 
 //API End Points
 export const REGISTER = `${API_URL}/auth/register`;
