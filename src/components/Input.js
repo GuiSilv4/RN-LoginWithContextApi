@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/Feather';
 export default function Input(props) {
 
   const [showPassword, setShowPassword] = useState(false);
-  const [inputText, setInputText] = useState("");
 
   const initialSizeState = {
     fontSize: 16,
@@ -34,10 +33,6 @@ export default function Input(props) {
   useEffect(() => {
     loadSize();
   }, [props.size]);
-
-  useEffect(() => {
-    setInputText(props.value);
-  }, [props.value]);
 
   const eyeIcon = () => {
     return (
@@ -65,10 +60,8 @@ export default function Input(props) {
         placeholder={props.placeholder}
         autoCapitalize='none'
         autoCorrect={false}
-        value={inputText}
-        onChangeText={text => {
-          { props.onChangeText && props.onChangeText(text) }
-        }}
+        value={props.value}
+        onChangeText={props.onChangeText}
         secureTextEntry={props.secure ? !showPassword : false}
         selectTextOnFocus={false}
 
